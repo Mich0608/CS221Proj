@@ -1,0 +1,24 @@
+Group
+  signature CHECK
+  structure Check
+  structure Test
+  structure Type
+  structure L23Proj
+  structure Casted
+  structure Cast
+  structure Subst
+  structure TypeEnv
+  structure TypeCheck
+is
+  $/basis.cm
+  $/smlnj-lib.cm
+  check.sig
+  check.sml
+  test.sml
+  type.sml
+  l23proj.sml
+  casted.sml
+  cast.sml
+  subst.sml
+  type-env.sml
+  typecheck.sml
