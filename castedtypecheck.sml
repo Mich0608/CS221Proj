@@ -1,7 +1,5 @@
 structure CastedTypeCheck : sig
 
-  val consistent : Type.typ * Type.typ -> bool
-
   val envtype : TypeEnv.env * Casted.term -> Type.typ
   val typeof : Casted.term -> Type.typ
 							
@@ -10,12 +8,6 @@ end = struct
   structure C = Casted
   structure T = Type
   structure E = TypeEnv
-
-  fun consistent (T.Function(t1, t2), T.Function(t3, t4))
-    = consistent(t3, t1) andalso consistent(t2, t4)
-    | consistent (t1, T.Dynamic) = true
-    | consistent (T.Dynamic, t2) = true
-    | consistent (t1, t2) = t1 = t2
   
   fun envtype (gamma, (C.Const(n))) = T.Int
     | envtype (gamma, C.True) = T.Bool
@@ -34,7 +26,7 @@ end = struct
                else raise Fail "invalid type: app argument does not match function argument type"
            | _ => raise Fail "invalid type: must apply function or dynamic type")
     | envtype (gamma, (C.CastExp(typ, t1)))
-        = if consistent (envtype(gamma, t1), typ)
+        = if Consistent.consistent (envtype(gamma, t1), typ)
           then typ
           else raise Fail "invalid type: cast inconsistent with term"
 

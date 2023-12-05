@@ -33,4 +33,12 @@ structure Test = struct
       TextIO.print "cast typ tests done\n"
     end
 
+    fun all () =
+    let
+      val _ = cast ()
+      val _ = castedtyp ()
+    in
+      TextIO.print "all tests done\n"
+    end
+
 end

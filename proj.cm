@@ -10,6 +10,7 @@ Group
   structure TypeEnv
   structure TypeCheck
   structure CastedTypeCheck
+  structure Consistent
 is
   $/basis.cm
   $/smlnj-lib.cm
@@ -24,3 +25,4 @@ is
   type-env.sml
   typecheck.sml
   castedtypecheck.sml
+  consistent.sml

@@ -27,7 +27,7 @@ end = struct
           of ((e1', T.Dynamic), (e2', tau2))
               => (C.App(C.CastExp(T.Function(tau2, T.Dynamic), e1'), e2'), T.Dynamic)
            | ((e1', T.Function(tau, tau')), (e2', tau2))
-              => if tau2 <> tau andalso TypeCheck.consistent(tau, tau2)
+              => if tau2 <> tau andalso Consistent.consistent(tau, tau2)
                  then (C.App(e1', C.CastExp(tau, e2')), tau')
                  else if tau2 = tau
                       then (C.App(e1', e2'), tau')

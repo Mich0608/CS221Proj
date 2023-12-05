@@ -1,7 +1,5 @@
 structure TypeCheck : sig
 
-  val consistent : Type.typ * Type.typ -> bool
-
   val envtype : TypeEnv.env * L23Proj.term -> Type.typ
   val typeof : L23Proj.term -> Type.typ
 							
@@ -10,12 +8,6 @@ end = struct
   structure L = L23Proj
   structure T = Type
   structure E = TypeEnv
-
-  fun consistent (T.Function(t1, t2), T.Function(t3, t4))
-    = consistent(t3, t1) andalso consistent(t2, t4)
-    | consistent (t1, T.Dynamic) = true
-    | consistent (T.Dynamic, t2) = true
-    | consistent (t1, t2) = t1 = t2
   
   fun envtype (gamma, (L.Const(n))) = T.Int
     | envtype (gamma, L.True) = T.Bool
@@ -31,7 +23,7 @@ end = struct
     | envtype (gamma, L.App(t1, t2))
       = (case (envtype(gamma, t1), envtype(gamma, t2))
           of (T.Function(tau, tau'), tau2) 
-            => if consistent (tau2, tau)
+            => if Consistent.consistent (tau2, tau)
                then tau'
                else raise Fail "invalid type: app argument not consistent with function argument type"
            | (T.Dynamic, tau2) => T.Dynamic
