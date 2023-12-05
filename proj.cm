@@ -9,6 +9,7 @@ Group
   structure Subst
   structure TypeEnv
   structure TypeCheck
+  structure CastedTypeCheck
 is
   $/basis.cm
   $/smlnj-lib.cm
@@ -22,3 +23,4 @@ is
   subst.sml
   type-env.sml
   typecheck.sml
+  castedtypecheck.sml
