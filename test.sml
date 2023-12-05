@@ -1,5 +1,20 @@
 structure Test = struct
 
+  (* Type Checking Tests *)
+
+  fun typ_ term = Type.tos(TypeCheck.typeof(term))
+  
+  fun typ () = 
+    let
+      val _ = Check.expect(typ_ (L23Proj.True), "B", "typ0")
+      val _ = Check.expect(typ_ (L23Proj.Const(0)), "I", "typ0")
+      val _ = Check.expect(typ_ (L23Proj.ULam("x", L23Proj.Var("x"))), "(? -> ?)", "typ1")
+      val _ = Check.expect(typ_ (L23Proj.Lam("x", Type.Bool, L23Proj.Var("x"))), "(B -> B)", "typ2")
+      val _ = Check.expect(typ_ (L23Proj.Lam("x", Type.Dynamic, L23Proj.App(L23Proj.Lam("y", Type.Bool, L23Proj.Var("y")), L23Proj.Var("x")))), "(? -> B)", "typ3")
+    in
+      TextIO.print "typ tests done\n"
+    end
+
   (* Cast Tests *)
 
   val castexample1 = L23Proj.App(L23Proj.ULam("x", L23Proj.App(L23Proj.Lam("s", Type.Int, L23Proj.Var("s")), L23Proj.Var("x"))), L23Proj.True)
@@ -35,6 +50,7 @@ structure Test = struct
 
     fun all () =
     let
+      val _ = typ ()
       val _ = cast ()
       val _ = castedtyp ()
     in
