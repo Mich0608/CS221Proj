@@ -15,7 +15,7 @@ structure Test = struct
       TextIO.print "typ tests done\n"
     end
 
-  (* Cast Tests *)
+  (* Cast Tests from Section 5.3 in Siek and Taha *)
 
   val castexample1 = L23Proj.App(L23Proj.ULam("x", L23Proj.App(L23Proj.Lam("s", Type.Int, L23Proj.Var("s")), L23Proj.Var("x"))), L23Proj.True)
 
