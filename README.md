@@ -22,9 +22,11 @@ Note that both **typed** and **untyped** lambdas are allowed.
 While the gradually typed language defined by Siek and Taha paper also allow reference types, we are not including them as we have not previously programmed a compiler for reference types, and we feel that the above terms give us enough flexibility for the purpose of experimenting with gradual typing.
 
 ### Type Checking
-The type checker in `TypeCheck.sml` follows the gradual typing system laid out in **Figure 2** of the Siek and Taha paper. Note that there is a separate type system for the intermediate language after cast insertion (defined in **Figure 6** in the paper). I plan to write a separate typechecker for that since it's pretty similar.
+The type checker in `TypeCheck.sml` follows the gradual typing system laid out in **Figure 2** of the Siek and Taha paper. 
+There is a separate type system for the intermediate language after cast insertion (defined in **Figure 6** in the paper). This type checker is implemented in `CastedTypeCheck.sml`. 
 
 ### Cast Insertion
 Cast insertion in `Cast.sml` follows the cast insertion judgements in **Figure 5** of the paper. The result of casting a `L23Proj` term is a `Casted` term that represents a term in the intermediate language.
 
+### Testing
 To test cast insertion using the two examples from **Section 5.3** of the the Siek and Taha paper, run `Test.cast()`. You can see the tests in `test.sml`.
